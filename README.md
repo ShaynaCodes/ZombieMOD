@@ -5,11 +5,11 @@ The Branches my mods are in are the weapons folder, g_ai.c, g_cmds.c, g_items, g
 p_client.c. 
 
 My Deliverables
-- Hordes of zombies spawn
+1. Hordes of zombies spawn
   -type "go" and 10 monsters spawn
--Have teammates follow you around
+2. Have teammates follow you around
   -type "team" and 2 monster spawn and follow you
--Change quake weapons to walking dead waepons
+3. Change quake weapons to walking dead waepons
   -Blaster = Glock17
   -Shotgun = Mossberg 590
   -Super Shotgun = Remington 1100
@@ -19,14 +19,14 @@ My Deliverables
   -Rocket Launcher = Airtronic 
   -Hyperblaster= Horton Crossbow
   -Railgun = Browning snipe
--Change behavior of 5 Walkers
+4. Change behavior of 5 Walkers
   -All Monsters: walk, range 0(have to walk to you to attack), max attack(1 shots)
     -Berserk: Increase health and mass
     -Gunner:  Increase health and attack speed
     -Tank: even more tanky , bigger mass, attack boost
     -Gladiator: 1 hits you
     -Soldier: 1 hits
--An Objective
+5. An Objective
   - Kill the 10 monsters that spawn and dont get infected.
 
 
