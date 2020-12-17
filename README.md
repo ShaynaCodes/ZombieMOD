@@ -1,8 +1,7 @@
 # Zombie MOD
 Modification for Quake2 to Zombie Game
 
-The Branches my mods are in are the weapons folder, g_ai.c, g_cmds.c, g_items, g_monster.c, g_weapon.c, m_berserk.c, m_gladiator, m_gunner.c, m_medic.c, m_soldier.c, m_tank.c, 
-p_client.c. 
+The Branches my mods are in are the weapons folder, g_ai.c, g_cmds.c, g_items, g_monster.c, g_weapon.c, m_berserk.c, m_gladiator, m_gunner.c, m_medic.c, m_soldier.c, m_tank.c, p_client.c., p_hud.c
 
 My Deliverables
 1. Hordes of zombies spawn
