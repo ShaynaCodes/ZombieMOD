@@ -879,7 +879,22 @@ void Cmd_PlayerList_f(edict_t *ent)
 	}
 	gi.cprintf(ent, PRINT_HIGH, "%s", text);
 }
+//command to spawn the zombies
 
+void Cmd_Wave_f1(edict_t *ent){
+	
+	gi.cprintf(ent, PRINT_HIGH, "Zombies approching\n");
+	gi.cprintf(ent, PRINT_HIGH, "MISSION: Clear the 10 zombies approaching\n");	
+		Wave_(ent);
+}
+
+//command to spawn the teammates
+void Cmd_Team_(edict_t *ent)
+{
+	
+	gi.cprintf(ent, PRINT_HIGH, "Teammates!\n");
+	Teammates_(ent);
+}
 
 /*
 =================
@@ -894,7 +909,11 @@ void ClientCommand (edict_t *ent)
 		return;		// not fully in game yet
 
 	cmd = gi.argv(0);
-
+	/*if (Q_stricmp(cmd, "poop") == 0)
+	{
+		Cmd_Team_(ent);
+		return;
+	}*/
 	if (Q_stricmp (cmd, "players") == 0)
 	{
 		Cmd_Players_f (ent);
@@ -968,6 +987,10 @@ void ClientCommand (edict_t *ent)
 		Cmd_Wave_f (ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
+	else if (Q_stricmp(cmd, "go") == 0)
+		Cmd_Wave_f1(ent);
+	else if (Q_stricmp(cmd, "team") == 0)
+		Cmd_Team_(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

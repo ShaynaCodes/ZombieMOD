@@ -1093,3 +1093,6 @@ struct edict_s
 	monsterinfo_t	monsterinfo;
 };
 
+
+extern void Wave_(edict_t *ent);
+extern void Teammates_(edict_t *ent);

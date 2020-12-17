@@ -1,5 +1,9 @@
 #include "g_local.h"
 #include "m_player.h"
+//setting the amount of waves and each monster in each wave
+go = 0;
+wavecount = 0;
+wave = 0;
 
 void ClientUserinfoChanged (edict_t *ent, char *userinfo);
 
@@ -297,24 +301,24 @@ void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
 			switch (mod)
 			{
 			case MOD_BLASTER:
-				message = "was blasted by";
+				message = "was infected by";
 				break;
 			case MOD_SHOTGUN:
-				message = "was gunned down by";
+				message = "was infected by";
 				break;
 			case MOD_SSHOTGUN:
-				message = "was blown away by";
+				message = "was infected by";
 				message2 = "'s super shotgun";
 				break;
 			case MOD_MACHINEGUN:
-				message = "was machinegunned by";
+				message = "was infected by";
 				break;
 			case MOD_CHAINGUN:
-				message = "was cut in half by";
+				message = "was eaten by";
 				message2 = "'s chaingun";
 				break;
 			case MOD_GRENADE:
-				message = "was popped by";
+				message = "was infected by";
 				message2 = "'s grenade";
 				break;
 			case MOD_G_SPLASH:
@@ -330,11 +334,11 @@ void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
 				message2 = "'s rocket";
 				break;
 			case MOD_HYPERBLASTER:
-				message = "was melted by";
+				message = "was infected by";
 				message2 = "'s hyperblaster";
 				break;
 			case MOD_RAILGUN:
-				message = "was railed by";
+				message = "was infected by";
 				break;
 			case MOD_BFG_LASER:
 				message = "saw the pretty lights from";
@@ -588,12 +592,52 @@ but is called after each death and level change in deathmatch
 void InitClientPersistant (gclient_t *client)
 {
 	gitem_t		*item;
-
+	gitem_t		*item2;
+	gitem_t		*item3;
+	gitem_t		*item4;
+	gitem_t		*item5;
+	gitem_t		*item6;
+	gitem_t		*item7;
+	gitem_t		*item8;
+	gitem_t		*item9;
+    
 	memset (&client->pers, 0, sizeof(client->pers));
 
-	item = FindItem("Blaster");
+	item = FindItem("Glock17");
 	client->pers.selected_item = ITEM_INDEX(item);
 	client->pers.inventory[client->pers.selected_item] = 1;
+
+	item2 = FindItem("Mossberg 590");
+	client->pers.selected_item = ITEM_INDEX(item2);
+	client->pers.inventory[client->pers.selected_item] = 2;
+	
+	item3 = FindItem("Remington 1100");
+	client->pers.selected_item = ITEM_INDEX(item3);
+	client->pers.inventory[client->pers.selected_item] = 3;
+
+	item4 = FindItem("DshK");
+	client->pers.selected_item = ITEM_INDEX(item4);
+	client->pers.inventory[client->pers.selected_item] = 4;
+
+	item5 = FindItem("orion flare");
+	client->pers.selected_item = ITEM_INDEX(item5);
+	client->pers.inventory[client->pers.selected_item] = 5;
+
+	item6 = FindItem("DefTech Rotary");
+	client->pers.selected_item = ITEM_INDEX(item6);
+	client->pers.inventory[client->pers.selected_item] = 6;
+
+	item7 = FindItem("Airtronic");
+	client->pers.selected_item = ITEM_INDEX(item7);
+	client->pers.inventory[client->pers.selected_item] = 7;
+
+	item8 = FindItem("Horton Crossbow");
+	client->pers.selected_item = ITEM_INDEX(item8);
+	client->pers.inventory[client->pers.selected_item] = 8;
+
+	item9 = FindItem("Browning snipe");
+	client->pers.selected_item = ITEM_INDEX(item9);
+	client->pers.inventory[client->pers.selected_item] = 9;
 
 	client->pers.weapon = item;
 
@@ -1567,7 +1611,16 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 
 	level.current_entity = ent;
 	client = ent->client;
-
+//wave macanicts starts here
+	if (wave == 1)
+	{
+		
+		if (wave <= 0)
+		{
+			Wave_(ent);
+			wave = 0;
+		}
+	}
 	if (level.intermissiontime)
 	{
 		client->ps.pmove.pm_type = PM_FREEZE;
@@ -1732,6 +1785,8 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		if (other->inuse && other->client->chase_target == ent)
 			UpdateChaseCam(other);
 	}
+	//code for teammates
+	
 }
 
 
@@ -1794,3 +1849,7 @@ void ClientBeginServerFrame (edict_t *ent)
 
 	client->latched_buttons = 0;
 }
+void SP_wave(edict_t *ent);
+
+
+

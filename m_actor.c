@@ -588,3 +588,4 @@ void SP_target_actor (edict_t *self)
 
 	gi.linkentity (self);
 }
+

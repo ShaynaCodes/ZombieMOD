@@ -179,9 +179,10 @@ void ai_charge (edict_t *self, float dist)
 	VectorSubtract (self->enemy->s.origin, self->s.origin, v);
 	self->ideal_yaw = vectoyaw(v);
 	M_ChangeYaw (self);
+	M_walkmove(self, 1 /*self->s.angles[YAW]*/, dist);
 
 	if (dist)
-		M_walkmove (self, self->s.angles[YAW], dist);
+		M_walkmove (self, 1/*self->s.angles[YAW]*/, dist);
 }
 
 
@@ -251,11 +252,12 @@ int range (edict_t *self, edict_t *other)
 	len = VectorLength (v);
 	if (len < MELEE_DISTANCE)
 		return RANGE_MELEE;
-	if (len < 500)
+	if (len < 0/*500*/)
 		return RANGE_NEAR;
-	if (len < 1000)
+	if (len < 0/*1000*/)
 		return RANGE_MID;
 	return RANGE_FAR;
+	//changed the range so monsters have to walk up to you to kill you. Basically the monster(Zombie) is biting you
 }
 
 /*
@@ -733,11 +735,11 @@ void ai_run_slide(edict_t *self, float distance)
 	else
 		ofs = -90;
 	
-	if (M_walkmove (self, self->ideal_yaw + ofs, distance))
+	if (M_walkmove (self, 1+ofs/*self->ideal_yaw + ofs*/, distance))
 		return;
 		
 	self->monsterinfo.lefty = 1 - self->monsterinfo.lefty;
-	M_walkmove (self, self->ideal_yaw - ofs, distance);
+	M_walkmove(self, 1 - ofs/*self->ideal_yaw - ofs*/, distance);
 }
 
 

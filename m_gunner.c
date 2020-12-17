@@ -178,14 +178,14 @@ void gunner_walk (edict_t *self)
 
 mframe_t gunner_frames_run [] =
 {
-	ai_run, 26, NULL,
-	ai_run, 9,  NULL,
-	ai_run, 9,  NULL,
-	ai_run, 9,  NULL,
-	ai_run, 15, NULL,
-	ai_run, 10, NULL,
-	ai_run, 13, NULL,
-	ai_run, 6,  NULL
+	ai_run, 0, NULL,
+	ai_run, 0,  NULL,
+	ai_run, 0,  NULL,
+	ai_run, 0,  NULL,
+	ai_run, 0, NULL,
+	ai_run, 0, NULL,
+	ai_run, 0, NULL,
+	ai_run, 0,  NULL
 };
 
 mmove_t gunner_move_run = {FRAME_run01, FRAME_run08, gunner_frames_run, NULL};
@@ -195,24 +195,25 @@ void gunner_run (edict_t *self)
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 		self->monsterinfo.currentmove = &gunner_move_stand;
 	else
-		self->monsterinfo.currentmove = &gunner_move_run;
+		self->monsterinfo.currentmove = &gunner_move_walk; //change to walk
 }
 
 mframe_t gunner_frames_runandshoot [] =
 {
-	ai_run, 32, NULL,
-	ai_run, 15, NULL,
-	ai_run, 10, NULL,
-	ai_run, 18, NULL,
-	ai_run, 8,  NULL,
-	ai_run, 20, NULL
+	ai_run, 1, NULL,
+	ai_run, 1, NULL,
+	ai_run, 1, NULL,
+	ai_run, 1, NULL,
+	ai_run, 1,  NULL,
+	ai_run, 1, NULL
 };
 
 mmove_t gunner_move_runandshoot = {FRAME_runs01, FRAME_runs06, gunner_frames_runandshoot, NULL};
 
 void gunner_runandshoot (edict_t *self)
 {
-	self->monsterinfo.currentmove = &gunner_move_runandshoot;
+	self->monsterinfo.currentmove = &gunner_move_walk; //change to walk
+
 }
 
 mframe_t gunner_frames_pain3 [] =
@@ -523,21 +524,22 @@ mframe_t gunner_frames_attack_grenade [] =
 	ai_charge, 0, NULL,
 	ai_charge, 0, NULL
 };
-mmove_t gunner_move_attack_grenade = {FRAME_attak101, FRAME_attak121, gunner_frames_attack_grenade, gunner_run};
+mmove_t gunner_move_attack_grenade = {FRAME_attak101, FRAME_attak121, gunner_frames_attack_grenade/*, gunner_run*/};
 
 void gunner_attack(edict_t *self)
 {
 	if (range (self, self->enemy) == RANGE_MELEE)
 	{
 		self->monsterinfo.currentmove = &gunner_move_attack_chain;
+		
 	}
-	else
+	/*else
 	{
 		if (random() <= 0.5)
 			self->monsterinfo.currentmove = &gunner_move_attack_grenade;
 		else
 			self->monsterinfo.currentmove = &gunner_move_attack_chain;
-	}
+	}*/
 }
 
 void gunner_fire_chain(edict_t *self)
@@ -559,7 +561,7 @@ void gunner_refire_chain(edict_t *self)
 
 /*QUAKED monster_gunner (1 .5 0) (-16 -16 -24) (16 16 32) Ambush Trigger_Spawn Sight
 */
-void SP_monster_gunner (edict_t *self)
+void SP_monster_gunner (edict_t *self) //maybe spawn more
 {
 	if (deathmatch->value)
 	{
@@ -595,7 +597,7 @@ void SP_monster_gunner (edict_t *self)
 	self->monsterinfo.walk = gunner_walk;
 	self->monsterinfo.run = gunner_run;
 	self->monsterinfo.dodge = gunner_dodge;
-	self->monsterinfo.attack = gunner_attack;
+	self->monsterinfo.attack = RANGE_MELEE;
 	self->monsterinfo.melee = NULL;
 	self->monsterinfo.sight = gunner_sight;
 	self->monsterinfo.search = gunner_search;

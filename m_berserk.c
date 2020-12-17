@@ -9,7 +9,6 @@ BERSERK
 #include "g_local.h"
 #include "m_berserk.h"
 
-
 static int sound_pain;
 static int sound_die;
 static int sound_idle;
@@ -151,7 +150,7 @@ void berserk_run (edict_t *self)
 void berserk_attack_spike (edict_t *self)
 {
 	static	vec3_t	aim = {MELEE_DISTANCE, 0, -24};
-	fire_hit (self, aim, (15 + (rand() % 6)), 400);		//	Faster attack -- upwards and backwards
+	fire_hit (self, aim, 300, 500);	//should 1 hit	//	Faster attack -- upwards and backwards
 }
 
 
@@ -162,14 +161,14 @@ void berserk_swing (edict_t *self)
 
 mframe_t berserk_frames_attack_spike [] =
 {
-		ai_charge, 0, NULL,
-		ai_charge, 0, NULL,
-		ai_charge, 0, berserk_swing,
-		ai_charge, 0, berserk_attack_spike,
-		ai_charge, 0, NULL,
-		ai_charge, 0, NULL,
-		ai_charge, 0, NULL,
-		ai_charge, 0, NULL
+	ai_run, 0, NULL,
+	ai_run, 0, NULL,
+	ai_run, 0, berserk_swing,
+	ai_run, 0, berserk_attack_spike,
+	ai_run, 0, NULL,
+	ai_run, 0, NULL,
+	ai_run, 0, NULL,
+	ai_run, 0, NULL
 };
 mmove_t berserk_move_attack_spike = {FRAME_att_c1, FRAME_att_c8, berserk_frames_attack_spike, berserk_run};
 
@@ -413,9 +412,9 @@ void SP_monster_berserk (edict_t *self)
 	self->movetype = MOVETYPE_STEP;
 	self->solid = SOLID_BBOX;
 
-	self->health = 240;
+	self->health = 500;//changed to 500
 	self->gib_health = -60;
-	self->mass = 250;
+	self->mass = 400;//changed to 400
 
 	self->pain = berserk_pain;
 	self->die = berserk_die;
@@ -436,3 +435,4 @@ void SP_monster_berserk (edict_t *self)
 
 	walkmonster_start (self);
 }
+

@@ -11,7 +11,7 @@
 // the damages too, but I'm not sure that's such a good idea.
 void monster_fire_bullet (edict_t *self, vec3_t start, vec3_t dir, int damage, int kick, int hspread, int vspread, int flashtype)
 {
-	fire_bullet (self, start, dir, damage, kick, hspread, vspread, MOD_UNKNOWN);
+	fire_bullet (self, start, dir, 0, kick, hspread, vspread, MOD_UNKNOWN);
 
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
@@ -21,7 +21,7 @@ void monster_fire_bullet (edict_t *self, vec3_t start, vec3_t dir, int damage, i
 
 void monster_fire_shotgun (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int hspread, int vspread, int count, int flashtype)
 {
-	fire_shotgun (self, start, aimdir, damage, kick, hspread, vspread, count, MOD_UNKNOWN);
+	fire_shotgun (self, start, aimdir, 0, kick, hspread, vspread, count, MOD_UNKNOWN);
 
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
@@ -31,7 +31,7 @@ void monster_fire_shotgun (edict_t *self, vec3_t start, vec3_t aimdir, int damag
 
 void monster_fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, int flashtype, int effect)
 {
-	fire_blaster (self, start, dir, damage, speed, effect, false);
+	fire_blaster (self, start, dir, 0, speed, effect, false);
 
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
@@ -41,7 +41,7 @@ void monster_fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, 
 
 void monster_fire_grenade (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, int flashtype)
 {
-	fire_grenade (self, start, aimdir, damage, speed, 2.5, damage+40);
+	fire_grenade (self, start, aimdir, 0, speed, 2.5, 0+40);
 
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
@@ -51,7 +51,7 @@ void monster_fire_grenade (edict_t *self, vec3_t start, vec3_t aimdir, int damag
 
 void monster_fire_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, int flashtype)
 {
-	fire_rocket (self, start, dir, damage, speed, damage+20, damage);
+	fire_rocket (self, start, dir, 0, speed, 0+20, 0);
 
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
@@ -61,7 +61,7 @@ void monster_fire_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, i
 
 void monster_fire_railgun (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int flashtype)
 {
-	fire_rail (self, start, aimdir, damage, kick);
+	fire_rail (self, start, aimdir, 0, kick);
 
 	gi.WriteByte (svc_muzzleflash2);
 	gi.WriteShort (self - g_edicts);
@@ -661,7 +661,7 @@ void walkmonster_start_go (edict_t *self)
 	}
 	
 	if (!self->yaw_speed)
-		self->yaw_speed = 20;
+		self->yaw_speed = 2;//change 2 from 20
 	self->viewheight = 25;
 
 	monster_start_go (self);
@@ -719,3 +719,110 @@ void swimmonster_start (edict_t *self)
 	self->think = swimmonster_start_go;
 	monster_start (self);
 }
+//making the waves of monster to appear, with different monsters
+void Wave_(edict_t *ent){
+	edict_t *spot = G_Spawn();
+	edict_t *spot2 = G_Spawn();
+	edict_t *spot3 = G_Spawn();
+	edict_t *spot4 = G_Spawn();
+	edict_t *spot5 = G_Spawn();
+	edict_t *spot6 = G_Spawn();
+	edict_t *spot7 = G_Spawn();
+	edict_t *spot8 = G_Spawn();
+	edict_t *spot9 = G_Spawn();
+	edict_t *spot10 = G_Spawn();
+		spot->s.origin[0] = 180;
+		spot->s.origin[1] = -100;
+		spot->s.origin[2] = 25;
+
+		spot->s.angles[1] = 270;
+		SP_monster_gunner(spot);
+
+		spot2->s.origin[0] = 60;
+		spot2->s.origin[1] = -130;
+		spot2->s.origin[2] = 25;
+
+
+		spot2->s.angles[1] = 180;
+		SP_monster_berserk(spot2);
+
+		spot3->s.origin[0] = 220;
+		spot3->s.origin[1] = -200;
+		spot3->s.origin[2] = 25;
+
+		spot3->s.angles[1] = 90;
+		SP_monster_tank(spot3);
+
+		spot4->s.origin[0] = 30;
+		spot4->s.origin[1] = -150;
+		spot4->s.origin[2] = 25;
+
+		spot4->s.angles[1] = 0;
+		SP_monster_gladiator(spot4);
+
+		spot5->s.origin[0] = 70;
+		spot5->s.origin[1] = -170;
+		spot5->s.origin[2] = 25;
+
+		spot5->s.angles[1] = 25;
+		SP_monster_soldier(spot5);
+
+		spot6->s.origin[0] = 110;
+		spot6->s.origin[1] = -180;
+		spot6->s.origin[2] = 25;
+
+		spot6->s.angles[1] = 0;
+		SP_monster_berserk(spot6);
+
+		spot7->s.origin[0] = 150;
+		spot7->s.origin[1] = -75;
+		spot7->s.origin[2] = 25;
+
+		spot7->s.angles[1] = 90;
+		SP_monster_gunner(spot7);
+
+		spot8->s.origin[0] = 10;
+		spot8->s.origin[1] = -50;
+		spot8->s.origin[2] = 25;
+
+		spot8->s.angles[1] = 270;
+		SP_monster_tank(spot8);
+
+		spot9->s.origin[0] = 250;
+		spot9->s.origin[1] = -240;
+		spot9->s.origin[2] = 25;
+
+		spot9->s.angles[1] = 75;
+		SP_monster_gladiator(spot9);
+
+		spot10->s.origin[0] = 200;
+		spot10->s.origin[1] = -220;
+		spot10->s.origin[2] = 25;
+
+
+		spot10->s.angles[1] = 180;
+		SP_monster_soldier(spot10);
+}
+
+void Teammates_(edict_t *ent){
+	edict_t *spot = G_Spawn();
+
+	spot->s.origin[0] = 180;
+	spot->s.origin[1] = -100;
+	spot->s.origin[2] = 25;
+
+	spot->s.angles[1] = 270;
+	SP_monster_medic(spot);
+
+	edict_t *spot2 = G_Spawn();
+
+	spot2->s.origin[0] = 60;
+	spot2->s.origin[1] = -130;
+	spot2->s.origin[2] = 25;
+
+
+	spot2->s.angles[1] = 180;
+	SP_monster_medic(spot2);
+	
+}
+	

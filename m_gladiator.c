@@ -90,11 +90,11 @@ void gladiator_walk (edict_t *self)
 mframe_t gladiator_frames_run [] =
 {
 	ai_run, 23,	NULL,
-	ai_run, 14,	NULL,
-	ai_run, 14,	NULL,
-	ai_run, 21,	NULL,
-	ai_run, 12,	NULL,
-	ai_run, 13,	NULL
+	ai_run, 14, NULL,
+	ai_run, 14, NULL,
+	ai_run, 21, NULL,
+	ai_run, 12, NULL,
+	ai_run, 13, NULL
 };
 mmove_t gladiator_move_run = {FRAME_run1, FRAME_run6, gladiator_frames_run, NULL};
 
@@ -112,7 +112,7 @@ void GaldiatorMelee (edict_t *self)
 	vec3_t	aim;
 
 	VectorSet (aim, MELEE_DISTANCE, self->mins[0], -4);
-	if (fire_hit (self, aim, (20 + (rand() %5)), 300))
+	if (fire_hit (self, aim, 500, 300))
 		gi.sound (self, CHAN_AUTO, sound_cleaver_hit, 1, ATTN_NORM, 0);
 	else
 		gi.sound (self, CHAN_AUTO, sound_cleaver_miss, 1, ATTN_NORM, 0);
@@ -159,7 +159,7 @@ void GladiatorGun (edict_t *self)
 	VectorSubtract (self->pos1, start, dir);
 	VectorNormalize (dir);
 
-	monster_fire_railgun (self, start, dir, 50, 100, MZ2_GLADIATOR_RAILGUN_1);
+	monster_fire_railgun (self, start, dir, 500, 100, MZ2_GLADIATOR_RAILGUN_1);
 }
 
 mframe_t gladiator_frames_attack_gun [] =

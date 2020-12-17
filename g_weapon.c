@@ -353,7 +353,7 @@ void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int spee
 	bolt->touch = blaster_touch;
 	bolt->nextthink = level.time + 2;
 	bolt->think = G_FreeEdict;
-	bolt->dmg = damage;
+	bolt->dmg = 200;
 	bolt->classname = "bolt";
 	if (hyper)
 		bolt->spawnflags = 1;

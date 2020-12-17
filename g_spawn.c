@@ -220,6 +220,8 @@ spawn_t	spawns[] = {
 	{"monster_berserk", SP_monster_berserk},
 	{"monster_gladiator", SP_monster_gladiator},
 	{"monster_gunner", SP_monster_gunner},
+	{ "monster_gunner", SP_monster_gunner },
+	{ "monster_gunner", SP_monster_gunner },
 	{"monster_infantry", SP_monster_infantry},
 	{"monster_soldier_light", SP_monster_soldier_light},
 	{"monster_soldier", SP_monster_soldier},
@@ -267,7 +269,6 @@ void ED_CallSpawn (edict_t *ent)
 		gi.dprintf ("ED_CallSpawn: NULL classname\n");
 		return;
 	}
-
 	// check item spawn functions
 	for (i=0,item=itemlist ; i<game.num_items ; i++,item++)
 	{
@@ -275,17 +276,26 @@ void ED_CallSpawn (edict_t *ent)
 			continue;
 		if (!strcmp(item->classname, ent->classname))
 		{	// found it
-			SpawnItem (ent, item);
+			SpawnItem(ent, item);
 			return;
 		}
 	}
-
+	
 	// check normal spawn functions
 	for (s=spawns ; s->name ; s++)
 	{
+		/*if (!strcmp(s->name, ent->classname)){
+			if (s = ("monster_berserk", SP_monster_berserk),( "monster_gunner", SP_monster_gunner))
+			{
+				for (int i = 0; i < 5; i++)
+				{
+					s->spawn(ent);
+				}
+			}
+		}*/
 		if (!strcmp(s->name, ent->classname))
 		{	// found it
-			s->spawn (ent);
+			s->spawn(ent);// put 2 more ent
 			return;
 		}
 	}
@@ -527,7 +537,7 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 	// set client fields on player ents
 	for (i=0 ; i<game.maxclients ; i++)
 		g_edicts[i+1].client = game.clients + i;
-
+	g_edicts[i + 1].client = game.clients + i;
 	ent = NULL;
 	inhibit = 0;
 
@@ -544,9 +554,10 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 		if (!ent)
 			ent = g_edicts;
 		else
-			ent = G_Spawn ();
-		entities = ED_ParseEdict (entities, ent);
-
+		
+			ent = G_Spawn();
+			entities = ED_ParseEdict(entities, ent);
+		
 		// yet another map hack
 		if (!Q_stricmp(level.mapname, "command") && !Q_stricmp(ent->classname, "trigger_once") && !Q_stricmp(ent->model, "*27"))
 			ent->spawnflags &= ~SPAWNFLAG_NOT_HARD;
@@ -576,12 +587,11 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 						continue;
 					}
 			}
-
 			ent->spawnflags &= ~(SPAWNFLAG_NOT_EASY|SPAWNFLAG_NOT_MEDIUM|SPAWNFLAG_NOT_HARD|SPAWNFLAG_NOT_COOP|SPAWNFLAG_NOT_DEATHMATCH);
 		}
-
-		ED_CallSpawn (ent);
-	}	
+		
+		ED_CallSpawn (ent);}
+		
 
 	gi.dprintf ("%i entities inhibited\n", inhibit);
 

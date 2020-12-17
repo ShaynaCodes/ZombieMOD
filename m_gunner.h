@@ -213,3 +213,7 @@
 #define FRAME_duck08          	208
 
 #define MODEL_SCALE		1.150000
+#define FRAME_att_c1          	76
+#define FRAME_att_c8			45
+#define FRAME_att_c9          	84
+#define FRAME_att_c20         	95

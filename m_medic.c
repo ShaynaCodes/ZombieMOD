@@ -235,7 +235,7 @@ mframe_t medic_frames_run [] =
 	ai_run, 35.6,	NULL
 	
 };
-mmove_t medic_move_run = {FRAME_run1, FRAME_run6, medic_frames_run, NULL};
+mmove_t medic_move_run = {FRAME_run1, FRAME_run6, medic_frames_walk, NULL};
 
 void medic_run (edict_t *self)
 {
@@ -342,7 +342,7 @@ void medic_fire_blaster (edict_t *self)
 	end[2] += self->enemy->viewheight;
 	VectorSubtract (end, start, dir);
 
-	monster_fire_blaster (self, start, dir, 2, 1000, MZ2_MEDIC_BLASTER_1, effect);
+	monster_fire_blaster (self, start, dir, 0, 0, MZ2_MEDIC_BLASTER_1, effect);
 }
 
 
@@ -502,7 +502,7 @@ mframe_t medic_frames_attackHyperBlaster [] =
 	ai_charge, 0,	medic_fire_blaster,
 	ai_charge, 0,	medic_fire_blaster
 };
-mmove_t medic_move_attackHyperBlaster = {FRAME_attack15, FRAME_attack30, medic_frames_attackHyperBlaster, medic_run};
+mmove_t medic_move_attackHyperBlaster = {FRAME_attack15, FRAME_attack30, medic_frames_walk, medic_run};
 
 
 void medic_continue (edict_t *self)
@@ -530,7 +530,7 @@ mframe_t medic_frames_attackBlaster [] =
 	ai_charge, 0,	NULL,
 	ai_charge, 0,	medic_continue	// Change to medic_continue... Else, go to frame 32
 };
-mmove_t medic_move_attackBlaster = {FRAME_attack1, FRAME_attack14, medic_frames_attackBlaster, medic_run};
+mmove_t medic_move_attackBlaster = {FRAME_attack1, FRAME_attack14, medic_frames_walk, medic_run};
 
 
 void medic_hook_launch (edict_t *self)
@@ -671,7 +671,7 @@ mframe_t medic_frames_attackCable [] =
 	ai_move, 1.2,	NULL,
 	ai_move, 1.3,	NULL
 };
-mmove_t medic_move_attackCable = {FRAME_attack33, FRAME_attack60, medic_frames_attackCable, medic_run};
+mmove_t medic_move_attackCable = {FRAME_attack33, FRAME_attack60, medic_frames_walk, medic_run};
 
 
 void medic_attack(edict_t *self)
@@ -732,7 +732,7 @@ void SP_monster_medic (edict_t *self)
 
 	self->monsterinfo.stand = medic_stand;
 	self->monsterinfo.walk = medic_walk;
-	self->monsterinfo.run = medic_run;
+	self->monsterinfo.run = medic_walk;
 	self->monsterinfo.dodge = medic_dodge;
 	self->monsterinfo.attack = medic_attack;
 	self->monsterinfo.melee = NULL;

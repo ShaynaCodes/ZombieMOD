@@ -331,7 +331,7 @@ void TankBlaster (edict_t *self)
 	end[2] += self->enemy->viewheight;
 	VectorSubtract (end, start, dir);
 
-	monster_fire_blaster (self, start, dir, 30, 800, flash_number, EF_BLASTER);
+	monster_fire_blaster (self, start, dir, 500, 800, flash_number, EF_BLASTER);
 }	
 
 void TankStrike (edict_t *self)
@@ -362,7 +362,7 @@ void TankRocket (edict_t *self)
 	VectorSubtract (vec, start, dir);
 	VectorNormalize (dir);
 
-	monster_fire_rocket (self, start, dir, 50, 550, flash_number);
+	monster_fire_rocket (self, start, dir, 60, 550, flash_number);
 }	
 
 void TankMachineGun (edict_t *self)
@@ -398,7 +398,7 @@ void TankMachineGun (edict_t *self)
 
 	AngleVectors (dir, forward, NULL, NULL);
 
-	monster_fire_bullet (self, start, forward, 20, 4, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, flash_number);
+	monster_fire_bullet (self, start, forward, 40, 4, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, flash_number);
 }	
 
 
@@ -647,7 +647,7 @@ void tank_attack(edict_t *self)
 	}
 
 	VectorSubtract (self->enemy->s.origin, self->s.origin, vec);
-	range = VectorLength (vec);
+	range = VectorLength (0);
 
 	r = random();
 
@@ -808,17 +808,17 @@ void SP_monster_tank (edict_t *self)
 	}
 	else
 	{
-		self->health = 750;
+		self->health = 1000;
 		self->gib_health = -200;
 	}
 
-	self->mass = 500;
+	self->mass = 700;
 
 	self->pain = tank_pain;
 	self->die = tank_die;
 	self->monsterinfo.stand = tank_stand;
 	self->monsterinfo.walk = tank_walk;
-	self->monsterinfo.run = tank_run;
+	self->monsterinfo.run = tank_walk;
 	self->monsterinfo.dodge = NULL;
 	self->monsterinfo.attack = tank_attack;
 	self->monsterinfo.melee = NULL;
