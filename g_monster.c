@@ -731,77 +731,79 @@ void Wave_(edict_t *ent){
 	edict_t *spot8 = G_Spawn();
 	edict_t *spot9 = G_Spawn();
 	edict_t *spot10 = G_Spawn();
-		spot->s.origin[0] = 180;
-		spot->s.origin[1] = -100;
-		spot->s.origin[2] = 25;
+	spot->s.origin[0] = 180;
+	spot->s.origin[1] = -100;
+	spot->s.origin[2] = 25;
 
-		spot->s.angles[1] = 270;
-		SP_monster_gunner(spot);
-
-		spot2->s.origin[0] = 60;
-		spot2->s.origin[1] = -130;
-		spot2->s.origin[2] = 25;
-
-
-		spot2->s.angles[1] = 180;
-		SP_monster_berserk(spot2);
-
-		spot3->s.origin[0] = 220;
-		spot3->s.origin[1] = -200;
-		spot3->s.origin[2] = 25;
-
-		spot3->s.angles[1] = 90;
-		SP_monster_tank(spot3);
-
-		spot4->s.origin[0] = 30;
-		spot4->s.origin[1] = -150;
-		spot4->s.origin[2] = 25;
-
-		spot4->s.angles[1] = 0;
-		SP_monster_gladiator(spot4);
-
-		spot5->s.origin[0] = 70;
-		spot5->s.origin[1] = -170;
-		spot5->s.origin[2] = 25;
-
-		spot5->s.angles[1] = 25;
-		SP_monster_soldier(spot5);
-
-		spot6->s.origin[0] = 110;
-		spot6->s.origin[1] = -180;
-		spot6->s.origin[2] = 25;
-
-		spot6->s.angles[1] = 0;
-		SP_monster_berserk(spot6);
-
-		spot7->s.origin[0] = 150;
-		spot7->s.origin[1] = -75;
-		spot7->s.origin[2] = 25;
-
-		spot7->s.angles[1] = 90;
-		SP_monster_gunner(spot7);
-
-		spot8->s.origin[0] = 10;
-		spot8->s.origin[1] = -50;
-		spot8->s.origin[2] = 25;
-
-		spot8->s.angles[1] = 270;
-		SP_monster_tank(spot8);
-
-		spot9->s.origin[0] = 250;
-		spot9->s.origin[1] = -240;
-		spot9->s.origin[2] = 25;
-
-		spot9->s.angles[1] = 75;
-		SP_monster_gladiator(spot9);
-
-		spot10->s.origin[0] = 200;
-		spot10->s.origin[1] = -220;
-		spot10->s.origin[2] = 25;
+	spot->s.angles[1] = 270;
+	SP_monster_gunner(spot);
+	
+	spot2->s.origin[0] = 60;
+	spot2->s.origin[1] = -130;
+	spot2->s.origin[2] = 25;
 
 
-		spot10->s.angles[1] = 180;
-		SP_monster_soldier(spot10);
+	spot2->s.angles[1] = 180;
+	SP_monster_berserk(spot2);
+	
+	spot3->s.origin[0] = 220;
+	spot3->s.origin[1] = -200;
+	spot3->s.origin[2] = 25;
+
+	spot3->s.angles[1] = 90;
+	SP_monster_tank(spot3);
+	
+	spot4->s.origin[0] = 30;
+	spot4->s.origin[1] = -150;
+	spot4->s.origin[2] = 25;
+
+	spot4->s.angles[1] = 0;
+	SP_monster_gladiator(spot4);
+
+	spot5->s.origin[0] = 70;
+	spot5->s.origin[1] = -170;
+	spot5->s.origin[2] = 25;
+
+	spot5->s.angles[1] = 25;
+	SP_monster_soldier(spot5);
+	
+	spot6->s.origin[0] = 110;
+	spot6->s.origin[1] = -180;
+	spot6->s.origin[2] = 25;
+
+	spot6->s.angles[1] = 0;
+	SP_monster_berserk(spot6);
+	
+	spot7->s.origin[0] = 150;
+	spot7->s.origin[1] = -75;
+	spot7->s.origin[2] = 25;
+
+	spot7->s.angles[1] = 90;
+	SP_monster_gunner(spot7);
+	
+	spot8->s.origin[0] = 10;
+	spot8->s.origin[1] = -50;
+	spot8->s.origin[2] = 25;
+
+	spot8->s.angles[1] = 270;
+	SP_monster_tank(spot8);
+	
+	spot9->s.origin[0] = 250;
+	spot9->s.origin[1] = -240;
+	spot9->s.origin[2] = 25;
+
+	spot9->s.angles[1] = 75;
+	SP_monster_gladiator(spot9);
+	
+	spot10->s.origin[0] = 200;
+	spot10->s.origin[1] = -220;
+	spot10->s.origin[2] = 25;
+
+
+	spot10->s.angles[1] = 180;
+	SP_monster_soldier(spot10);
+	
+
 }
 
 void Teammates_(edict_t *ent){

@@ -818,7 +818,7 @@ void SP_monster_tank (edict_t *self)
 	self->die = tank_die;
 	self->monsterinfo.stand = tank_stand;
 	self->monsterinfo.walk = tank_walk;
-	self->monsterinfo.run = tank_walk;
+	self->monsterinfo.run = tank_run;
 	self->monsterinfo.dodge = NULL;
 	self->monsterinfo.attack = tank_attack;
 	self->monsterinfo.melee = NULL;

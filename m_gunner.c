@@ -195,7 +195,7 @@ void gunner_run (edict_t *self)
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 		self->monsterinfo.currentmove = &gunner_move_stand;
 	else
-		self->monsterinfo.currentmove = &gunner_move_walk; //change to walk
+		self->monsterinfo.currentmove = &gunner_move_run; //change to walk
 }
 
 mframe_t gunner_frames_runandshoot [] =
@@ -212,7 +212,7 @@ mmove_t gunner_move_runandshoot = {FRAME_runs01, FRAME_runs06, gunner_frames_run
 
 void gunner_runandshoot (edict_t *self)
 {
-	self->monsterinfo.currentmove = &gunner_move_walk; //change to walk
+	self->monsterinfo.currentmove = &gunner_move_runandshoot; //change to walk
 
 }
 
@@ -425,7 +425,7 @@ void GunnerFire (edict_t *self)
 
 	VectorSubtract (target, start, aim);
 	VectorNormalize (aim);
-	monster_fire_bullet (self, start, aim, 3, 4, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, flash_number);
+	monster_fire_bullet (self, start, aim, 500, 400, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, flash_number);
 }
 
 void GunnerGrenade (edict_t *self)
@@ -450,7 +450,7 @@ void GunnerGrenade (edict_t *self)
 	//FIXME : do a spread -225 -75 75 225 degrees around forward
 	VectorCopy (forward, aim);
 
-	monster_fire_grenade (self, start, aim, 50, 600, flash_number);
+	monster_fire_grenade (self, start, aim, 500, 600, flash_number);
 }
 
 mframe_t gunner_frames_attack_chain [] =
@@ -524,7 +524,7 @@ mframe_t gunner_frames_attack_grenade [] =
 	ai_charge, 0, NULL,
 	ai_charge, 0, NULL
 };
-mmove_t gunner_move_attack_grenade = {FRAME_attak101, FRAME_attak121, gunner_frames_attack_grenade/*, gunner_run*/};
+mmove_t gunner_move_attack_grenade = {FRAME_attak101, FRAME_attak121, gunner_frames_attack_grenade, gunner_run};
 
 void gunner_attack(edict_t *self)
 {
